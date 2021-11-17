@@ -10,7 +10,7 @@ public class WorldGen : MonoBehaviour
 	public int height;
 	public float scale;
 
-	private float noiseScale = 1f;
+	private float noiseScale;
 	// Start is called before the first frame update
 	void Start()
 	{
@@ -25,9 +25,10 @@ public class WorldGen : MonoBehaviour
 
 
 
-					if ((Perlin3D(x, y) * (float)height) > y)
+					if ((Perlin3D(x, z) * (float)height) > y)
 					{
-						Instantiate(cube, new Vector3(x, y, z), Quaternion.identity);
+						var cubes = Instantiate(cube, new Vector3(x, y, z), Quaternion.identity);
+						cubes.transform.parent = gameObject.transform;
 					}
 				}
 			}
